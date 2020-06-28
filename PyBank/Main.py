@@ -60,4 +60,15 @@ print(f'Average Change: ${average}')
 print(f'Greatest Increase in Profits: {max_month} (${max_delta})')
 print(f'Greatest Decrease in Profits: {min_month} (${min_delta})')
 
+# Adding code in to create a new text file and printing the summary to the text file
+f = open("PyBank Analysis.txt", 'w')
+f.write('Financial Analysis \n')
+f.write('----------------------------- \n')
+f.write(f'Total Months: {num_mos} \n')
+f.write(f'Total : ${total} \n')
+f.write(f'Average Change: ${average} \n')
+f.write(f'Greatest Increase in Profits: {max_month} (${max_delta}) \n')
+f.write(f'Greatest Decrease in Profits: {min_month} (${min_delta}) \n')
+f.close()
+
 
