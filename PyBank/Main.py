@@ -3,7 +3,7 @@ import os
 import csv
 
 # Define the csv path
-csvpath = os.path.join('..','PyBank\Resources', 'budget_data.csv')
+csvpath = os.path.join('..','PyBank/Resources', 'budget_data.csv')
 print(csvpath)
 
 # Open the csv w/ comma as delimiter
@@ -61,7 +61,11 @@ print(f'Greatest Increase in Profits: {max_month} (${max_delta})')
 print(f'Greatest Decrease in Profits: {min_month} (${min_delta})')
 
 # Adding code in to create a new text file and printing the summary to the text file
-f = open("PyBank Analysis.txt", 'w')
+
+thisFolder = os.path.dirname(os.path.abspath(__file__))
+afpath = os.path.join(thisFolder, 'Analysis', 'PyBank Analysis.txt')    # Sets the file path to place the summary in the Analysis folder
+
+f = open(afpath, 'w')
 f.write('Financial Analysis \n')
 f.write('----------------------------- \n')
 f.write(f'Total Months: {num_mos} \n')
