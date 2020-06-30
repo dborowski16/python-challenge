@@ -48,8 +48,8 @@ with open(csvpath) as budget_file:
             min_delta = delta[i-1]
             min_month = mo[i]
 
-    # calculate average MoM change using the total months
-    average = avg_delta/(num_mos - 1)
+    # calculate average MoM change using the total months, formatted the float to 2 decimal places
+    average = '{:.02f}'.format(avg_delta/(num_mos - 1))
 
 # Creating a summary table
 print('Financial Analysis')
