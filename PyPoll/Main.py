@@ -20,6 +20,7 @@ with open(csvpath) as election_file:
     vote = []
     candidate = []
     candidate_total = [0, 0, 0, 0]
+    win_percent = [0, 0, 0, 0]
     county = []
 
     # for loop through rows to calculate total votes and create new list with candidates and counties
@@ -48,6 +49,14 @@ with open(csvpath) as election_file:
         elif vote[i-1] == candidate[3]:
             candidate_total[3] = candidate_total[3] + 1
 
-    print(candidate_total)
+    # for loop to calculate candidate win percentage based upon voter share
+    for i in range(1,5):
+        win_percent[i-1] = '{:0.003%}'.format(candidate_total[i-1]/total_votes)
+    # print(win_percent)
+
+    #Calculating the winner based upon the greatest win percent
+    winner = candidate[win_percent.index(max(win_percent))]
+    print(winner)
+
 
 
