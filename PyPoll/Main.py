@@ -39,15 +39,19 @@ with open(csvpath) as election_file:
     # print(candidate)
 
     # for loop to calculate number of votes per candidate
-    for i in range(1, (total_votes)):
-        if vote[i-1] == candidate[0]:
-            candidate_total[0] = candidate_total[0] + 1
-        elif vote[i-1] == candidate[1]:
-            candidate_total[1] = candidate_total[1] + 1  
-        elif vote[i-1] == candidate[2]:
-            candidate_total[2] = candidate_total[2] + 1
-        elif vote[i-1] == candidate[3]:
-            candidate_total[3] = candidate_total[3] + 1
+    for i in range(1, (total_votes+1)):
+        for j in range(1,len(candidate)+1):
+            if vote[i-1] == candidate[j-1]:
+                candidate_total[j-1] = candidate_total[j-1] + 1
+        
+        # if vote[i-1] == candidate[0]:
+        #     candidate_total[0] = candidate_total[0] + 1
+        # elif vote[i-1] == candidate[1]:
+        #     candidate_total[1] = candidate_total[1] + 1  
+        # elif vote[i-1] == candidate[2]:
+        #     candidate_total[2] = candidate_total[2] + 1
+        # elif vote[i-1] == candidate[3]:
+        #     candidate_total[3] = candidate_total[3] + 1
 
     # for loop to calculate candidate win percentage based upon voter share
     for i in range(1,5):
@@ -73,7 +77,6 @@ print('-'*30)
 
 
 # Adding code in to create a new text file and printing the summary to the text file
-
 afpath = os.path.join(thisFolder, 'Analysis', 'PyBank Analysis.txt')    # Sets the file path to place the summary in the Analysis folder
 
 f = open(afpath, 'w')
