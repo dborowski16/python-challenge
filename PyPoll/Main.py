@@ -5,7 +5,7 @@ import csv
 # Define the csv path
 thisFolder = os.path.dirname(os.path.abspath(__file__))
 csvpath = os.path.join(thisFolder,'Resources', 'election_data.csv')
-print(csvpath)
+# print(csvpath)
 
 # Open csv file with comma as delimiter
 with open(csvpath) as election_file:
@@ -56,7 +56,39 @@ with open(csvpath) as election_file:
 
     #Calculating the winner based upon the greatest win percent
     winner = candidate[win_percent.index(max(win_percent))]
-    print(winner)
+    # print(winner)
+
+# Creating a summary table
+print('Election results')
+print('-'*30)
+print(f'Total Votes: {total_votes}')
+print('-'*30)
+print(f'{candidate[0]} : {win_percent[0]} ({candidate_total[0]})')
+print(f'{candidate[1]} : {win_percent[1]} ({candidate_total[1]})')
+print(f'{candidate[2]} : {win_percent[2]} ({candidate_total[2]})')
+print(f'{candidate[3]} : {win_percent[3]} ({candidate_total[3]})')
+print('-'*30)
+print(f'Winner: {winner}')
+print('-'*30)
+
+
+# Adding code in to create a new text file and printing the summary to the text file
+
+afpath = os.path.join(thisFolder, 'Analysis', 'PyBank Analysis.txt')    # Sets the file path to place the summary in the Analysis folder
+
+f = open(afpath, 'w')
+f.write('Election results \n')
+f.write('----------------------------- \n')
+f.write(f'Total Votes: {total_votes} \n')
+f.write('----------------------------- \n')
+f.write(f'{candidate[0]} : {win_percent[0]} ({candidate_total[0]}) \n')
+f.write(f'{candidate[1]} : {win_percent[1]} ({candidate_total[1]}) \n')
+f.write(f'{candidate[2]} : {win_percent[2]} ({candidate_total[2]}) \n')
+f.write(f'{candidate[3]} : {win_percent[3]} ({candidate_total[3]}) \n')
+f.write('----------------------------- \n')
+f.write(f'Winner: {winner} \n')
+f.write('----------------------------- \n')
+f.close()
 
 
 
