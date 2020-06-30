@@ -77,7 +77,7 @@ print('-'*30)
 
 
 # Adding code in to create a new text file and printing the summary to the text file
-afpath = os.path.join(thisFolder, 'Analysis', 'PyBank Analysis.txt')    # Sets the file path to place the summary in the Analysis folder
+afpath = os.path.join(thisFolder, 'Analysis', 'PyPoll Analysis.txt')    # Sets the file path to place the summary in the Analysis folder
 
 f = open(afpath, 'w')
 f.write('Election results \n')
