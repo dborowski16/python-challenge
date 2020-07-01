@@ -11,8 +11,6 @@ print(csvpath)
 num_mos = 0
 total = 0
 avg_delta = 0
-max_delta = 0
-min_delta = 0
 mo_pl = [] # individual month profit/loss
 mo = [] # month and year
 delta = [] # MoM change
@@ -39,14 +37,12 @@ with open(csvpath) as budget_file:
         prev = mo_pl[i] # Sets the previous month value to the current month
         avg_delta = avg_delta + change # Calculates total of the MoM changes, to be used to calculate an average MoM later
 
-        # Check to see it the current MoM change is greater than or less than the current values
-        if int(delta[i-1]) > max_delta:
-            max_delta = delta[i-1]
-            max_month = mo[i]
+    # Setting the max/min values and corresponding month/year
+    max_delta = max(delta)
+    max_month = mo[delta.index(max(delta))+1]
 
-        elif int(delta[i-1]) < min_delta:
-            min_delta = delta[i-1]
-            min_month = mo[i]
+    min_delta = min(delta)
+    min_month = mo[delta.index(min(delta))+1]
 
     # calculate average MoM change using the total months, formatted the float to 2 decimal places
     average = '{:.02f}'.format(avg_delta/(num_mos - 1))
