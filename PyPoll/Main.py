@@ -5,7 +5,13 @@ import csv
 # Define the csv path
 thisFolder = os.path.dirname(os.path.abspath(__file__))
 csvpath = os.path.join(thisFolder,'Resources', 'election_data.csv')
-# print(csvpath)
+
+# Define variables and new lists
+total_votes = 0
+vote = []   # List to store the candidate name of each voter
+candidate = []  # List to store the unique candidate name
+candidate_total = [0, 0, 0, 0]  # Total number of votes by candidate
+win_percent = [0, 0, 0, 0]  # Win percentage of the votes by candidate
 
 # Open csv file with comma as delimiter
 with open(csvpath) as election_file:
@@ -13,23 +19,10 @@ with open(csvpath) as election_file:
 
     # Set header to ignore first row of data
     election_header = next(election)
-    # print(f'Election Header: {election_header}')
 
-    # Define variables and new lists
-    total_votes = 0
-    vote = []   # List to store the candidate name of each voter
-    candidate = []  # List to store the unique candidate name
-    candidate_total = [0, 0, 0, 0]  # Total number of votes by candidate
-    win_percent = [0, 0, 0, 0]  # Win percentage of the votes by candidate
-    county = []
-
-    # for loop through rows to calculate total votes and create new list with candidates and counties
-    for row in election:
-        total_votes = total_votes + 1
-        vote.append(row[2])
-        county.append(row[1])
-    # print(total_votes)
-    # print(len(vote))
+    # Calculate total votes and create new list with candidates
+    vote = [row[2] for row in election]
+    total_votes = len(vote)
 
     # for loop to create a new list with unique candidate names
     for name in vote:
@@ -41,24 +34,13 @@ with open(csvpath) as election_file:
         for j in range(1,len(candidate)+1):
             if vote[i-1] == candidate[j-1]:
                 candidate_total[j-1] = candidate_total[j-1] + 1
-        
-        # if vote[i-1] == candidate[0]:
-        #     candidate_total[0] = candidate_total[0] + 1
-        # elif vote[i-1] == candidate[1]:
-        #     candidate_total[1] = candidate_total[1] + 1  
-        # elif vote[i-1] == candidate[2]:
-        #     candidate_total[2] = candidate_total[2] + 1
-        # elif vote[i-1] == candidate[3]:
-        #     candidate_total[3] = candidate_total[3] + 1
 
     # for loop to calculate candidate win percentage based upon voter share
     for i in range(1,len(candidate)+1):
         win_percent[i-1] = '{:0.003%}'.format(candidate_total[i-1]/total_votes)
-    # print(win_percent)
 
     #Calculating the winner based upon the greatest win percent
     winner = candidate[win_percent.index(max(win_percent))]
-    # print(winner)
 
 # Creating a summary table
 print('Election results')
