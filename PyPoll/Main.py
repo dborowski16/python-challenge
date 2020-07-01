@@ -33,11 +33,10 @@ with open(csvpath) as election_file:
     for i in range(1, (total_votes+1)):
         for j in range(1,len(cand)+1):
             if vote[i-1] == cand[j-1]:
-                can_tot[j-1] = can_tot[j-1] + 1
+                can_tot[j-1] = can_tot[j-1] + 1        
 
-    # for loop to calculate candidate win percentage based upon voter share
-    for i in range(1,len(cand)+1):
-        win_pct[i-1] = '{:0.003%}'.format(can_tot[i-1]/total_votes)
+    # Calculate candidate win percentage based upon voter share
+    win_pct = ['{:0.003%}'.format(can_tot[i-1]/total_votes) for i in range(1,len(cand)+1)]
 
     #Calculating the winner based upon the greatest win percent
     winner = cand[win_pct.index(max(win_pct))]
