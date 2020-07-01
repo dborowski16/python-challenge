@@ -7,23 +7,22 @@ thisFolder = os.path.dirname(os.path.abspath(__file__))
 csvpath = os.path.join(thisFolder, 'Resources', 'budget_data.csv')
 print(csvpath)
 
+# Define new lists and set values to zero
+num_mos = 0
+total = 0
+avg_delta = 0
+max_delta = 0
+min_delta = 0
+mo_pl = [] # individual month profit/loss
+mo = [] # month and year
+delta = [] # MoM change
+
 # Open the csv w/ comma as delimiter
 with open(csvpath) as budget_file:
     budget = csv.reader(budget_file, delimiter = ',')
 
     # Set the budget header to leave out of calculations
     budget_header = next(budget)
-    # print(f'Budget Header: {budget_header}')
-
-    # Define new lists and set values to zero
-    num_mos = 0
-    total = 0
-    avg_delta = 0
-    max_delta = 0
-    min_delta = 0
-    mo_pl = [] # individual month profit/loss
-    mo = [] # month and year
-    delta = [] # MoM change
 
     # Running calculations by row while reading the csv
     for row in budget:
@@ -62,8 +61,6 @@ print(f'Greatest Increase in Profits: {max_month} (${max_delta})')
 print(f'Greatest Decrease in Profits: {min_month} (${min_delta})')
 
 # Adding code in to create a new text file and printing the summary to the text file
-
-thisFolder = os.path.dirname(os.path.abspath(__file__))
 afpath = os.path.join(thisFolder, 'Analysis', 'PyBank Analysis.txt')    # Sets the file path to place the summary in the Analysis folder
 
 f = open(afpath, 'w')
