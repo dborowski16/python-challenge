@@ -3,7 +3,8 @@ import os
 import csv
 
 # Define the csv path
-csvpath = os.path.join('..','PyBank/Resources', 'budget_data.csv')
+thisFolder = os.path.dirname(os.path.abspath(__file__))
+csvpath = os.path.join(thisFolder, 'Resources', 'budget_data.csv')
 print(csvpath)
 
 # Open the csv w/ comma as delimiter
@@ -21,7 +22,7 @@ with open(csvpath) as budget_file:
     max_delta = 0
     min_delta = 0
     mo_pl = [] # individual month profit/loss
-    mo = [] # month and month
+    mo = [] # month and year
     delta = [] # MoM change
 
     # Running calculations by row while reading the csv
@@ -33,7 +34,7 @@ with open(csvpath) as budget_file:
         prev = mo_pl[0] # Assigns the first month profit/loss to prev for difference calculation
 
     # For loop to calculate the MoM deltas, average delta, and check for max and min MoM change
-    for i in range(1,86):
+    for i in range(1,num_mos):
         change = int(mo_pl[i]) - int(prev) # MoM change 
         delta.append(change) # Creates a new list containing the MoM change
         prev = mo_pl[i] # Sets the previous month value to the current month
