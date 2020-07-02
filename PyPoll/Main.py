@@ -10,8 +10,6 @@ csvpath = os.path.join(thisFolder,'Resources', 'election_data.csv')
 total_votes = 0
 vote = []   # List to store the candidate name of each voter
 cand = []  # List to store the unique candidate name
-can_tot = [0, 0, 0, 0]  # Total number of votes by candidate
-win_pct = [0, 0, 0, 0]  # Win percentage of the votes by candidate
 
 # Open csv file with comma as delimiter
 with open(csvpath) as election_file:
@@ -30,12 +28,15 @@ with open(csvpath) as election_file:
             cand.append(name)
 
     # nested for loop to calculate number of votes per candidate
+    can_tot = [0 for name in cand]  # Total number of votes by candidate
+
     for i in range(1, (total_votes+1)):
         for j in range(1,len(cand)+1):
             if vote[i-1] == cand[j-1]:
                 can_tot[j-1] = can_tot[j-1] + 1        
 
     # Calculate candidate win percentage based upon voter share
+    win_pct = [0 for name in cand]  # Win percentage of the votes by candidate
     win_pct = ['{:0.003%}'.format(can_tot[i-1]/total_votes) for i in range(1,len(cand)+1)]
 
     #Calculating the winner based upon the greatest win percent
